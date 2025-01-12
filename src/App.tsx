@@ -5,14 +5,23 @@ import { CardGrid } from "./components/CardGrid";
 import { HouseCard } from "./components/HouseCard";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { NavBar } from "./components/NavBar";
+import { HouseObject } from "./hooks/useHouse";
 
 function App() {
+  const [selectedHouse, setSelectedHose] = useState<number | null>(null);
   return (
     <Grid templateAreas={`"nav" "main"`}>
       <GridItem area={"nav"}>
-        <NavBar />
+        <NavBar
+          id={(id) => {
+            setSelectedHose(id);
+            console.log(selectedHouse);
+          }}
+        />
       </GridItem>
-      <GridItem area={"main"}></GridItem>
+      <GridItem area={"main"}>
+        <CardGrid selectedHouse={selectedHouse} />
+      </GridItem>
     </Grid>
   );
 }

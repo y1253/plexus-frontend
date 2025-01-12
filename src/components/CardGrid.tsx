@@ -1,13 +1,32 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, Text } from "@chakra-ui/react";
 import { HouseCard } from "./HouseCard";
+import useHouse, { HouseObject } from "../hooks/useHouse";
+import BootstrapCard from "./BootstrapCard";
 
-export const CardGrid = () => {
+interface Props {
+  selectedHouse: number | null;
+}
+export const CardGrid = ({ selectedHouse }: Props) => {
+  const {
+    data: house,
+    error,
+    isLoading,
+  } = useHouse(selectedHouse, [selectedHouse]);
+
   return (
     <>
-      <SimpleGrid columns={2} columnGap="2" rowGap="4">
-        <HouseCard />
-        <HouseCard />
-        <HouseCard />
+      {isLoading && <Text>Loading...</Text>}
+      {error && <Text>{error.message}</Text>}
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+        columnGap="10px"
+        rowGap={"10px"}
+        overflow={"hidden"}
+        padding={"10px"}
+      >
+        {house?.map((hs) => (
+          <HouseCard key={hs.id} house={hs} />
+        ))}
       </SimpleGrid>
     </>
   );
