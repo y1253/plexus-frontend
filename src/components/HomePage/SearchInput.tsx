@@ -1,6 +1,6 @@
 import { HStack, Input, InputElement } from "@chakra-ui/react";
 import { useRef } from "react";
-import { useGenra } from "../hooks/useGenra";
+import { useGenra } from "../../hooks/useGenra";
 interface Props {
   id: (id: number) => void;
 }

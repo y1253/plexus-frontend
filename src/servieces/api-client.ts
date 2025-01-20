@@ -13,7 +13,7 @@ class apiClient<T>{
         this.endpoint=endpoint;
     }
 
-    getAll=(selectedHouse:number|null)=>{
+    getAll=(selectedHouse:number|null |string|undefined)=>{
         return apiClientUrl.get<T>(this.endpoint,{params:{id:selectedHouse}}).then((res)=>res.data)
     }
 }

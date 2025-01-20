@@ -3,18 +3,24 @@ import apiClient from "../servieces/api-client";
 import { AxiosRequestConfig, CanceledError } from "axios";
 import { useQuery } from "@tanstack/react-query";
 
+
+export interface Picture {
+  picture: string;
+}
 export interface HouseObject {
-    id: number;
+  unit_id: number;
     address: string;
     main_picture: string;
     description:string;
-    price:number
+    price:number;
+    pictures:Picture[]
+
   }
 
 
 
 
-const useHouse = (selectedHouse:number |null,deps?:any[]) => {
+const useHouse = (selectedHouse:number |null|string|undefined,deps?:any[]) => {
   // const fatchHouse=()=>   
   // apiClient
   //     .get<HouseObject[]>("",{params:{id:selectedHouse}})
@@ -22,7 +28,7 @@ const useHouse = (selectedHouse:number |null,deps?:any[]) => {
   
   const fetchHouse=new apiClient<HouseObject[]>('')
   
-    useEffect(() => {
+    //useEffect(() => {
     //  const controller= new AbortController();
     
       // apiClient
@@ -34,7 +40,7 @@ const useHouse = (selectedHouse:number |null,deps?:any[]) => {
       //   });
 
     // return ()=> controller.abort();
-    },deps ?[...deps]:[]);
+    //},deps ?[...deps]:[]);
     return  useQuery<HouseObject[],Error>({
       queryKey:['houses',selectedHouse],
       queryFn:()=>fetchHouse.getAll(selectedHouse)
