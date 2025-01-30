@@ -1,20 +1,14 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import { HouseCard } from "./HouseCard";
 import useHouse, { HouseObject } from "../../hooks/useHouse";
-import BootstrapCard from "./BootstrapCard";
 import { useNavigate } from "react-router-dom";
-import { BootstrapLgCard } from "./BootstrapLgCard";
 
 interface Props {
   selectedHouse: number | null;
 }
 export const CardGrid = ({ selectedHouse }: Props) => {
   const navigateRoute = useNavigate();
-  const {
-    data: house,
-    error,
-    isLoading,
-  } = useHouse(selectedHouse, [selectedHouse]);
+  const { data: house, error, isLoading } = useHouse(selectedHouse);
 
   return (
     <>

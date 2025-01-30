@@ -1,4 +1,4 @@
-import { Table } from "@chakra-ui/react";
+import { For, Stack, Table } from "@chakra-ui/react";
 import { HouseObject } from "../../hooks/useHouse";
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
 }
 const Footer = ({ house }: Props) => {
   return (
-    <Table.Root size="sm">
+    <Table.Root size="sm" striped>
       <Table.Header>
         <Table.Row>
           <Table.ColumnHeader>Product</Table.ColumnHeader>
