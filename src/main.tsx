@@ -5,7 +5,7 @@ import { defaultSystem } from "@chakra-ui/react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import App from "./components/HomePage.tsx.tsx";
+
 import "bootstrap/dist/css/bootstrap.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./routing/routs.tsx";

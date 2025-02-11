@@ -1,6 +1,5 @@
-import { Button, Image, Input, SimpleGrid } from "@chakra-ui/react";
-import React, { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Button, Image, SimpleGrid } from "@chakra-ui/react";
+import { useRef, useState } from "react";
 
 interface Props {
   onSubmit: () => void;
@@ -9,7 +8,7 @@ interface Props {
 }
 export const InputSet4 = ({ onSubmit, onChange, previous }: Props) => {
   //const { register, handleSubmit, reset } = useForm();
-  const [path, setPath] = useState<string>();
+  const [path] = useState<string>();
   const ref = useRef<HTMLInputElement>(null);
 
   return (

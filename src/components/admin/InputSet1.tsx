@@ -1,4 +1,4 @@
-import { Button, Input, SimpleGrid, Stack } from "@chakra-ui/react";
+import { Button, Input, SimpleGrid } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
 interface Props {

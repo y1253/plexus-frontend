@@ -1,6 +1,5 @@
-import { Button, Card, Image, Text, Tooltip } from "@chakra-ui/react";
+import { Button, Card, Image, Text } from "@chakra-ui/react";
 import { HouseObject } from "../../hooks/useHouse";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   house: HouseObject;
@@ -8,27 +7,26 @@ interface Props {
 }
 export const HouseCard = ({ house, navigate }: Props) => {
   //const navigate = useNavigate();
+  function numberWithCommas(x: number) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   return (
-    <Card.Root
-      maxW="lg"
-      borderRadius={10}
-      overflow={"hidden"}
-      onClick={() => console.log("h")}
-    >
+    <Card.Root maxW="sm" borderRadius={10} overflow={"hidden"} shadow={"xl"}>
       <Image
-        height={300}
+        width={400}
+        height={350}
         crossOrigin="anonymous"
         src={house.main_picture}
         alt=""
       />
-      <Card.Body gap="2">
+      <Card.Body gap="0">
         <Card.Title>{house.address}</Card.Title>
         <Card.Description>{house.description}</Card.Description>
         <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">
-          ${house.price}
+          ${numberWithCommas(house.price)}
         </Text>
       </Card.Body>
-      <Card.Footer gap="2">
+      <Card.Footer gap="0" justifyContent={"Center"}>
         <Button variant="solid" onClick={navigate}>
           Read More
         </Button>

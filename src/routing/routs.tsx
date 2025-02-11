@@ -5,6 +5,7 @@ import { MainRoute } from "../MainRoute";
 import Contact from "../components/Contact.tsx";
 import { Admin } from "../components/Admin.tsx";
 import { InputSets } from "../components/admin/InputSets.tsx";
+import Login from "../components/admin/Login.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <Admin />,
-    children: [{ path: "/admin/input", element: <InputSets /> }],
+    children: [
+      { path: "/admin", element: <Login /> },
+      { path: "/admin/input", element: <InputSets /> },
+    ],
   },
 ]);
 export default router;

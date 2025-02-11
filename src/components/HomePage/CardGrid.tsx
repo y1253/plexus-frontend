@@ -1,6 +1,6 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import { HouseCard } from "./HouseCard";
-import useHouse, { HouseObject } from "../../hooks/useHouse";
+import useHouse from "../../hooks/useHouse";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -11,15 +11,16 @@ export const CardGrid = ({ selectedHouse }: Props) => {
   const { data: house, error, isLoading } = useHouse(selectedHouse);
 
   return (
-    <>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       {isLoading && <Text>Loading...</Text>}
       {error && <Text>{error.message}</Text>}
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 3 }}
-        columnGap="10px"
-        rowGap={"10px"}
+        marginTop={"20px"}
+        columnGap="20px"
+        rowGap={"20px"}
         overflow={"hidden"}
-        padding={"10px"}
+        padding={"20px"}
       >
         {house?.map((hs) => (
           <HouseCard
@@ -31,6 +32,6 @@ export const CardGrid = ({ selectedHouse }: Props) => {
           />
         ))}
       </SimpleGrid>
-    </>
+    </div>
   );
 };
