@@ -6,6 +6,8 @@ import Contact from "../components/Contact.tsx";
 import { Admin } from "../components/Admin.tsx";
 import { InputSets } from "../components/admin/InputSets.tsx";
 import Login from "../components/admin/Login.tsx";
+import AdminList from "../components/admin/AdminList.tsx";
+import PrivateRoute from "./PrivateRoute.tsx";
 
 const router = createBrowserRouter([
   {
@@ -15,14 +17,20 @@ const router = createBrowserRouter([
       { path: "/", element: <App /> },
       { path: "/home/:id", element: <HomeDetailPage /> },
       { path: "/Contact", element: <Contact /> },
+      { path: "/login", element: <Login /> },
     ],
   },
   {
-    path: "/admin",
-    element: <Admin />,
+    element: <PrivateRoute />,
     children: [
-      { path: "/admin", element: <Login /> },
-      { path: "/admin/input", element: <InputSets /> },
+      {
+        path: "/admin",
+        element: <Admin />,
+        children: [
+          { path: "/admin/list", element: <AdminList /> },
+          { path: "/admin/input", element: <InputSets /> },
+        ],
+      },
     ],
   },
 ]);

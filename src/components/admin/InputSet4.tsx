@@ -1,44 +1,40 @@
-import { Button, Image, SimpleGrid } from "@chakra-ui/react";
+import { Button, HStack, Image, SimpleGrid } from "@chakra-ui/react";
 import { useRef, useState } from "react";
+import {
+  FileUploadDropzone,
+  FileUploadList,
+  FileUploadRoot,
+} from "../ui/file-upload";
 
 interface Props {
-  onSubmit: () => void;
-  previous: () => void;
   onChange: (d: File) => void;
+  submit: () => void;
+  per: () => void;
 }
-export const InputSet4 = ({ onSubmit, onChange, previous }: Props) => {
-  //const { register, handleSubmit, reset } = useForm();
-  const [path] = useState<string>();
-  const ref = useRef<HTMLInputElement>(null);
-
+export const InputSet4 = ({ onChange, submit, per }: Props) => {
   return (
     <>
-      <Image src={path} />
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit();
-          //if (ref.current) onSubmit(ref.current?.value["0"]);
-          console.log(ref.current?.value);
-        }}
+      <FileUploadRoot
+        maxW="xl"
+        alignItems="stretch"
+        maxFiles={1}
+        onFileChange={(e) => onChange(e.acceptedFiles["0"])}
       >
-        <SimpleGrid columns={2} gap="40px">
-          <input
-            type="file"
-            name="file"
-            id="file"
-            accept=".png, .jpg"
-            ref={ref}
-            onChange={(e) => {
-              if (e.target.files) {
-                onChange(e.target.files["0"]);
-              }
-            }}
-          />
-        </SimpleGrid>
-        <Button type="submit">Submit</Button>
-        <Button onClick={previous}>Previous</Button>
-      </form>
+        <FileUploadDropzone
+          label="Drag and drop here to upload"
+          description=".png, .jpg up to 5MB"
+        />
+        <FileUploadList />
+      </FileUploadRoot>
+
+      <HStack marginTop={5}>
+        <Button variant="outline" size="sm" onClick={() => per()}>
+          Per
+        </Button>
+        <Button variant="outline" size="sm" onClick={submit}>
+          Next
+        </Button>
+      </HStack>
     </>
   );
 };

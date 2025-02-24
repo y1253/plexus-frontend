@@ -4,17 +4,31 @@ import InputSet2 from "./InputSet2";
 import InputSet3 from "./InputSet3";
 import { InputSet4 } from "./InputSet4";
 import useAddHouse from "../../hooks/useAddHouse";
+import {
+  StepsCompletedContent,
+  StepsContent,
+  StepsItem,
+  StepsList,
+  StepsRoot,
+} from "../ui/steps";
+import { Spinner } from "@chakra-ui/react/spinner";
+import { Alert } from "@chakra-ui/react/alert";
+import { data, useNavigate } from "react-router-dom";
 
 export const InputSets = () => {
-  const [inputNumber, setInputNumber] = useState(1);
-  const [file, setFile] = useState<File>();
-  const [data, setData] = useState<object>();
+  const [step, setStep] = useState(0);
 
-  const { mutate, isPending } = useAddHouse();
+  const [file, setFile] = useState<File>();
+  const [files, setFiles] = useState<File[]>();
+  const [fieldData, setFieldData] = useState<object>();
+
+  const { mutate, isPending, error, isSuccess } = useAddHouse();
+  const navigate = useNavigate();
 
   const submit = () => {
+    setStep(4);
     const formData = new FormData();
-    formData.append("info", JSON.stringify(data));
+    formData.append("info", JSON.stringify(fieldData));
     if (file) {
       formData.append("main_picture", file);
       formData.append("pictures", file);
@@ -22,46 +36,61 @@ export const InputSets = () => {
     mutate(formData);
   };
 
-  if (inputNumber === 4)
-    return (
-      <>
-        {isPending && <h1>PANDING....</h1>}
-        <InputSet4
-          onSubmit={submit}
-          onChange={(f) => setFile(f)}
-          previous={() => setInputNumber(inputNumber - 1)}
-        />
-      </>
-    );
+  const next = (data: object) => {
+    setFieldData({ ...fieldData, ...data });
+    console.log(data);
+    setStep(step + 1);
+  };
 
-  if (inputNumber === 3)
-    return (
-      <InputSet3
-        next={(d) => {
-          setData({ ...data, ...d });
-          setInputNumber(4);
-        }}
-        previous={() => setInputNumber(inputNumber - 1)}
-      />
-    );
-
-  if (inputNumber === 2)
-    return (
-      <InputSet2
-        next={(d) => {
-          setData({ ...data, ...d });
-          setInputNumber(3);
-        }}
-        previous={() => setInputNumber(inputNumber - 1)}
-      />
-    );
-
+  const per = () => setStep(step - 1);
+  isSuccess && navigate("/admin/list");
   return (
-    <InputSet1
-      next={(data) => {
-        setData(data);
-        setInputNumber(2);
-      }}
-    />
+    <>
+      {isPending && (
+        <Spinner size="xl" position={"absolute"} right={"50%"} top={"50%"} />
+      )}
+      {error && (
+        <Alert.Root status="error" onClick={() => setStep(0)}>
+          <Alert.Indicator />
+          <Alert.Content>
+            <Alert.Title>Invalid Fields</Alert.Title>
+            <Alert.Description>
+              Your form has some errors. Please fix them and try again.
+            </Alert.Description>
+          </Alert.Content>
+        </Alert.Root>
+      )}
+      <StepsRoot defaultStep={0} count={4} padding={5} step={step}>
+        <StepsList margin={4}>
+          <StepsItem index={0} />
+          <StepsItem index={1} />
+          <StepsItem index={2} />
+          <StepsItem index={3} />
+        </StepsList>
+
+        <StepsContent index={0}>
+          <InputSet1 next={next} />
+        </StepsContent>
+        <StepsContent index={1}>
+          <InputSet2 next={next} per={per} />
+        </StepsContent>
+        <StepsContent index={2}>
+          <InputSet3 next={next} per={per} />
+        </StepsContent>
+        <StepsContent index={3}>
+          <InputSet4
+            onChange={(data) => {
+              setFile(data);
+            }}
+            onChange2={(data) => {
+              setFiles(files ? [...files, data] : [data]);
+            }}
+            submit={submit}
+            per={per}
+          />
+        </StepsContent>
+        <StepsCompletedContent>All steps are complete!</StepsCompletedContent>
+      </StepsRoot>
+    </>
   );
 };

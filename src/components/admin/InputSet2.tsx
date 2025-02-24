@@ -1,42 +1,54 @@
-import { Button, Input, SimpleGrid } from "@chakra-ui/react";
+import {
+  Button,
+  createListCollection,
+  HStack,
+  Input,
+  SimpleGrid,
+} from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import InputFieldStructer from "./InputFieldStructer";
 
 interface Props {
   next: (d: object) => void;
-  previous: () => void;
+  per: () => void;
 }
 
-const InputSet2 = ({ next, previous }: Props) => {
-  const { register, handleSubmit, reset } = useForm();
-
+const InputSet2 = ({ next, per }: Props) => {
+  const { register, handleSubmit, setValue } = useForm();
   const dataList = [
     { id: "tag", name: "Tag", type: "text" },
     { id: "description", name: "Description", type: "text" },
-    { id: "year_build", name: "Year Build", type: "text" },
-    { id: "purchase_type", name: "Purchase Type", type: "text" },
-    { id: "price_per_sqft", name: "Price Per Sqft", type: "number" },
-    { id: "tex_amount", name: "Tex Amount", type: "number" },
+    { id: "year_build", name: "Year Build", type: "date" },
+    {
+      id: "purchase_type",
+      name: "Purchase Type",
+      type: "select",
+      options: createListCollection({
+        items: [
+          { label: "Sell", value: "Sell" },
+          { label: "Rent", value: "Rent" },
+        ],
+      }),
+    },
+    { id: "price_per_sqft", name: "Price Per Sqft", type: "currency" },
+    { id: "tex_amount", name: "Tex Amount", type: "currency" },
   ];
+  const submit = handleSubmit((e) => next(e));
   return (
-    <form
-      onSubmit={handleSubmit((data) => {
-        next(data);
-        reset();
-      })}
-    >
-      <SimpleGrid columns={2} gap="40px">
-        {dataList.map((data, index) => (
-          <Input
-            key={index}
-            {...register(data.id)}
-            placeholder={data.name}
-            type={data.type}
-            variant="flushed"
-          />
-        ))}
-      </SimpleGrid>
-      <Button type="submit">Next</Button>
-      <Button onClick={previous}>Previous</Button>
+    <form onSubmit={submit}>
+      <InputFieldStructer
+        register={register}
+        setValue={setValue}
+        dataList={dataList}
+      />
+      <HStack marginTop={5}>
+        <Button variant="outline" size="sm" onClick={() => per()}>
+          Per
+        </Button>
+        <Button variant="outline" size="sm" type="submit">
+          Next
+        </Button>
+      </HStack>
     </form>
   );
 };
