@@ -1,5 +1,5 @@
-import { Button, HStack, Image, SimpleGrid } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { Button, HStack } from "@chakra-ui/react";
+
 import {
   FileUploadDropzone,
   FileUploadList,
