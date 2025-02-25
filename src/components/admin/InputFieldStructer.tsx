@@ -1,22 +1,15 @@
-import {
-  Button,
-  createListCollection,
-  Input,
-  ListCollection,
-  SimpleGrid,
-} from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
+import { Input, ListCollection, SimpleGrid } from "@chakra-ui/react";
+
 import { Checkbox } from "../ui/checkbox";
-import { useState } from "react";
+
 import {
   SelectContent,
   SelectItem,
-  SelectLabel,
   SelectRoot,
   SelectTrigger,
   SelectValueText,
 } from "../ui/select";
-import { NumberInputField, NumberInputRoot } from "../ui/number-input";
+
 import { Field } from "../ui/field";
 import CurrencyInput from "react-currency-input-field";
 
@@ -39,28 +32,23 @@ interface Props {
 const InputFieldStructer = ({ register, setValue, dataList }: Props) => {
   return (
     <SimpleGrid columns={2} gap="40px">
-      {dataList.map((data, index) => (
-        <>
+      {dataList.map((data) => (
+        <Field label={data.name} key={data.id}>
           {data.type === "chack" && (
             <Checkbox
-              key={data.id}
               defaultChecked
               onCheckedChange={(e) => setValue("on_market", !!e.checked)}
-            >
-              On Market
-            </Checkbox>
+            ></Checkbox>
           )}
 
           {data.type === "select" && data.options && (
             <SelectRoot
-              key={data.id}
               {...register(data.id)}
               collection={data.options}
               size="sm"
               width="320px"
               defaultValue={[data.options.items[0].value]}
             >
-              <SelectLabel>Select {data.name}</SelectLabel>
               <SelectTrigger>
                 <SelectValueText />
               </SelectTrigger>
@@ -80,9 +68,9 @@ const InputFieldStructer = ({ register, setValue, dataList }: Props) => {
               intlConfig={{ locale: "en-US", currency: "USD" }}
               id="input-example"
               name="input-name"
-              placeholder={"Please enter " + data.name}
+              placeholder={"$ "}
               decimalsLimit={2}
-              onValueChange={(value, name, values) =>
+              onValueChange={(_value, _name, values) =>
                 setValue(data.id, values?.float)
               }
             />
@@ -92,13 +80,12 @@ const InputFieldStructer = ({ register, setValue, dataList }: Props) => {
             data.type === "date") && (
             <Input
               {...register(data.id, { required: data.name + " is required" })}
-              key={index}
-              placeholder={data.name}
+              //placeholder={data.name}
               type={data.type}
               variant="flushed"
             />
           )}
-        </>
+        </Field>
       ))}
     </SimpleGrid>
   );

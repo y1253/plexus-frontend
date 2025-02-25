@@ -1,4 +1,4 @@
-import { SimpleGrid, Text } from "@chakra-ui/react";
+import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import { HouseCard } from "./HouseCard";
 import useHouse from "../../hooks/useHouse";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,9 @@ export const CardGrid = ({ selectedHouse }: Props) => {
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
-      {isLoading && <Text>Loading...</Text>}
+      {isLoading && (
+        <Spinner size="xl" position={"absolute"} right={"50%"} top={"50%"} />
+      )}
       {error && <Text>{error.message}</Text>}
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 3 }}

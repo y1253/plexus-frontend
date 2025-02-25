@@ -1,4 +1,4 @@
-import { Button, HStack } from "@chakra-ui/react";
+import { Box, Button, HStack } from "@chakra-ui/react";
 
 import {
   FileUploadDropzone,
@@ -8,44 +8,48 @@ import {
 
 interface Props {
   onChange: (d: File) => void;
-  onChange2: (d: File) => void;
+  onChange2: (d: File[]) => void;
   submit: () => void;
   per: () => void;
 }
 export const InputSet4 = ({ onChange, onChange2, submit, per }: Props) => {
   return (
     <>
-      <FileUploadRoot
-        maxW="xl"
-        alignItems="stretch"
-        maxFiles={1}
-        onFileChange={(e) => onChange(e.acceptedFiles["0"])}
-      >
-        <FileUploadDropzone
-          label="Drag and drop here to upload"
-          description=".png, .jpg up to 5MB"
-        />
-        <FileUploadList />
-      </FileUploadRoot>
-      <FileUploadRoot
-        maxW="xl"
-        alignItems="stretch"
-        maxFiles={40}
-        onFileChange={(e) => onChange2(e.acceptedFiles["0"])}
-      >
-        <FileUploadDropzone
-          label="Drag and drop here to upload"
-          description=".png, .jpg up to 5MB"
-        />
-        <FileUploadList />
-      </FileUploadRoot>
-
+      <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+        <FileUploadRoot
+          marginBottom={20}
+          maxW="xl"
+          alignItems="stretch"
+          maxFiles={1}
+          onFileChange={(e) => onChange(e.acceptedFiles["0"])}
+        >
+          <FileUploadDropzone
+            label="Drag and drop Front Picture"
+            description=".png, .jpg up to 5MB"
+          />
+          <FileUploadList showSize clearable />
+        </FileUploadRoot>
+        <FileUploadRoot
+          maxW="xl"
+          alignItems="stretch"
+          maxFiles={40}
+          onFileChange={(e) => {
+            onChange2(e.acceptedFiles);
+          }}
+        >
+          <FileUploadDropzone
+            label="Drag and drop Additional pictures"
+            description=".png, .jpg up to 5MB"
+          />
+          <FileUploadList showSize clearable />
+        </FileUploadRoot>
+      </Box>
       <HStack marginTop={5}>
         <Button variant="outline" size="sm" onClick={() => per()}>
           Per
         </Button>
         <Button variant="outline" size="sm" onClick={submit}>
-          Next
+          Submit
         </Button>
       </HStack>
     </>

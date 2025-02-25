@@ -13,7 +13,7 @@ import {
 } from "../ui/steps";
 import { Spinner } from "@chakra-ui/react/spinner";
 import { Alert } from "@chakra-ui/react/alert";
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const InputSets = () => {
   const [step, setStep] = useState(0);
@@ -33,6 +33,7 @@ export const InputSets = () => {
       formData.append("main_picture", file);
       formData.append("pictures", file);
     }
+    files?.map((f) => formData.append("pictures", f));
     mutate(formData);
   };
 
@@ -83,7 +84,7 @@ export const InputSets = () => {
               setFile(data);
             }}
             onChange2={(data) => {
-              setFiles(files ? [...files, data] : [data]);
+              setFiles(data);
             }}
             submit={submit}
             per={per}

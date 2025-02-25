@@ -1,4 +1,4 @@
-import { Button, createListCollection } from "@chakra-ui/react";
+import { Button, createListCollection, HStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
 import InputFieldStructer from "./InputFieldStructer";
@@ -42,9 +42,11 @@ const InputSet1 = ({ next }: Props) => {
         setValue={setValue}
         dataList={dataList}
       />
-      <Button variant="outline" size="sm" type="submit">
-        Next
-      </Button>
+      <HStack marginTop={5}>
+        <Button variant="outline" size="sm" type="submit">
+          Next
+        </Button>
+      </HStack>
     </form>
   );
 };

@@ -17,7 +17,7 @@ const Login = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const { mutate, data, error } = useLogin();
+  const { mutate, data, error, isPending } = useLogin();
 
   const onSubmit = handleSubmit((d: object) => {
     mutate(d);
@@ -65,7 +65,9 @@ const Login = () => {
             />
           </Field>
 
-          <Button type="submit">Submit</Button>
+          <Button disabled={isPending} type="submit">
+            Submit
+          </Button>
         </Stack>
       </form>
     </>

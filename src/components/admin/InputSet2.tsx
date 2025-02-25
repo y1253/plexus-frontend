@@ -1,10 +1,4 @@
-import {
-  Button,
-  createListCollection,
-  HStack,
-  Input,
-  SimpleGrid,
-} from "@chakra-ui/react";
+import { Button, createListCollection, HStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import InputFieldStructer from "./InputFieldStructer";
 
