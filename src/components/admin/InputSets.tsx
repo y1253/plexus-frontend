@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputSet1 from "./InputSet1";
 import InputSet2 from "./InputSet2";
 import InputSet3 from "./InputSet3";
@@ -44,7 +44,11 @@ export const InputSets = () => {
   };
 
   const per = () => setStep(step - 1);
-  isSuccess && navigate("/admin/list");
+  useEffect(() => {
+    isSuccess && navigate("/admin/list");
+    error && setStep(0);
+  }, [error, isSuccess]);
+
   return (
     <>
       {isPending && (

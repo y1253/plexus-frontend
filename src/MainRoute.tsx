@@ -7,7 +7,6 @@ export const MainRoute = () => {
     <Grid templateAreas={`"nav" "main"`}>
       <GridItem area={"nav"}>
         <NavBar />
-        <div style={{ height: "60px" }}></div>
       </GridItem>
       <GridItem area={"main"}>
         <Outlet />

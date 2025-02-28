@@ -6,6 +6,7 @@ import DetailPicturs from "./HomeDetails/DetailPicturs";
 import Footer from "./HomeDetails/Footer";
 import useHouse from "../hooks/useHouse";
 import { useState } from "react";
+import GallerySelector from "./HomeDetails/GallerySelector";
 
 export const HomeDetailPage = () => {
   const params = useParams();
@@ -23,7 +24,7 @@ export const HomeDetailPage = () => {
               padding={"5px 0 0 0 "}
               borderRadius={10}
               width={"100%"}
-              margin={5}
+              margin={1}
               display={"flex"}
               flexDir={"column"}
               alignItems={"center"}
@@ -44,6 +45,7 @@ export const HomeDetailPage = () => {
                 picture={house[0].pictures}
                 changePicture={(p) => setMainPicture(p)}
               />
+              <GallerySelector picture={house[0].pictures}></GallerySelector>
             </Box>
           </GridItem>
           <GridItem width={"100%"} area={"footer"}>

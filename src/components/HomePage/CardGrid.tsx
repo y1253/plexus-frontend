@@ -18,7 +18,7 @@ export const CardGrid = ({ selectedHouse }: Props) => {
       {error && <Text>{error.message}</Text>}
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 3 }}
-        marginTop={"20px"}
+        marginTop={"80px"}
         columnGap="20px"
         rowGap={"20px"}
         overflow={"hidden"}

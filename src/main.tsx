@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import "bootstrap/dist/css/bootstrap.css";
+import "react-image-gallery/styles/css/image-gallery.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./routing/routs.tsx";
 
