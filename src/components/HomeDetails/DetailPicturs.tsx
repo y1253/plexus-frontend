@@ -1,28 +1,43 @@
-import { Box, HStack, Image } from "@chakra-ui/react";
+import { Box, Image, SimpleGrid } from "@chakra-ui/react";
 import { Picture } from "../../hooks/useHouse";
 
 interface Props {
   picture: Picture[];
+  currentMainPic: string;
   changePicture: (p: string) => void;
 }
 
-const DetailPicturs = ({ picture, changePicture }: Props) => {
+const DetailPicturs = ({ picture, changePicture, currentMainPic }: Props) => {
   return (
-    <HStack justifyContent={"center"} padding={3}>
-      {picture?.map((pc, index) => (
-        <Box border={"solid 1px"} borderRadius={7} padding={1}>
-          <Image
+    <Box height={"80vh"} overflowY={"auto"}>
+      <SimpleGrid
+        columns={{ sm: 1, md: 2 }}
+        //marginTop={"80px"}
+        columnGap="20px"
+        rowGap={"20px"}
+        overflow={"hidden"}
+        padding={"20px"}
+      >
+        {picture?.map((pc, index) => (
+          <Box
+            border={currentMainPic === pc.picture ? "solid 1px" : 0}
+            borderRadius={7}
+            padding={1}
+            as="button"
             key={index}
-            src={pc.picture}
-            height={"100px"}
-            width={"100px"}
-            rounded="md"
-            crossOrigin="anonymous"
-            onClick={() => changePicture(pc.picture)}
-          />
-        </Box>
-      ))}
-    </HStack>
+          >
+            <Image
+              src={pc.picture}
+              height={"100px"}
+              width={"100px"}
+              rounded="md"
+              crossOrigin="anonymous"
+              onClick={() => changePicture(pc.picture)}
+            />
+          </Box>
+        ))}
+      </SimpleGrid>
+    </Box>
   );
 };
 

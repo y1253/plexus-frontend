@@ -1,5 +1,6 @@
 import { Badge, Box, Button, Card, HStack, Image } from "@chakra-ui/react";
 import { HouseObject } from "../../hooks/useHouse";
+import { toTitleCase } from "../HomePage/HouseCard";
 
 interface Props {
   HouseInfo: HouseObject;
@@ -20,11 +21,13 @@ export const AdminHouseCard = ({ HouseInfo }: Props) => (
     />
     <Box>
       <Card.Body>
-        <Card.Title mb="2">{HouseInfo.address}</Card.Title>
+        <Card.Title mb="2">{toTitleCase(HouseInfo.address)}</Card.Title>
         <Card.Description>{HouseInfo.description}</Card.Description>
         <HStack mt="4">
-          <Badge>Hot</Badge>
-          <Badge>Caffeine</Badge>
+          <Badge>{HouseInfo.purchase_type}</Badge>
+          <Badge>
+            {"Listed " + HouseInfo.listed_date.toString().substring(0, 10)}
+          </Badge>
         </HStack>
       </Card.Body>
       <Card.Footer>

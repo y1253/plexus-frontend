@@ -36,6 +36,14 @@ export interface HouseObject {
     tex_amount:number;
 
 
+    credit_score:number;
+    appliances:string;
+    management:string;
+    lease_term:string;
+    gross_income_per_month:number; 
+
+
+
   }
 
 

@@ -5,12 +5,12 @@ interface Props {
   height: string;
 }
 
-const MainImage = ({ main_image, height }: Props) => {
+const MainImage = ({ main_image }: Props) => {
   return (
     <Image
       crossOrigin="anonymous"
       rounded="md"
-      height={height}
+      height={"80vh"}
       src={main_image}
     />
   );

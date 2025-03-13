@@ -8,6 +8,8 @@ import { InputSets } from "../components/admin/InputSets.tsx";
 import Login from "../components/admin/Login.tsx";
 import AdminList from "../components/admin/AdminList.tsx";
 import PrivateRoute from "./PrivateRoute.tsx";
+import GetSale from "../components/GetSale/GetSale.tsx";
+import GetRental from "../components/GetRental/GetRental.tsx";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +17,8 @@ const router = createBrowserRouter([
     element: <MainRoute />,
     children: [
       { path: "/", element: <App /> },
+      { path: "/forsale", element: <GetSale /> },
+      { path: "/forrent", element: <GetRental /> },
       { path: "/home/:id", element: <HomeDetailPage /> },
       { path: "/Contact", element: <Contact /> },
       { path: "/login", element: <Login /> },

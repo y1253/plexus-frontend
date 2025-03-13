@@ -26,10 +26,12 @@ const GallerySelector = ({ picture }: Props) => {
   );
   return (
     <ImageGallery
+      
       infinite={false}
       showNav={false}
       showPlayButton={false}
       items={images}
+      
       
     />
   );

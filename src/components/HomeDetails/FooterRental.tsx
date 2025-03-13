@@ -47,7 +47,7 @@ const Footer = ({ house }: Props) => {
             <Table.Cell textAlign="end">
               {house.update_date
                 ? house.update_date.toString().substring(0, 10)
-                : new Date(house.listed_date).toDateString()}
+                : house.listed_date.toString().substring(0, 10)}
             </Table.Cell>
           </Table.Row>
           <Table.Row>
@@ -99,21 +99,28 @@ const Footer = ({ house }: Props) => {
             <Table.Cell>Tag</Table.Cell>
             <Table.Cell textAlign="end">{house.tag}</Table.Cell>
           </Table.Row>
-          <Table.Row>
-            <Table.Cell>Year Build</Table.Cell>
-            <Table.Cell textAlign="end">
-              {house.year_build.toString().substring(0, 4)}
-            </Table.Cell>
-          </Table.Row>
+
           <Table.Row>
             <Table.Cell>Purchase Type</Table.Cell>
             <Table.Cell textAlign="end">{house.purchase_type}</Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>Tax Amount</Table.Cell>
+            <Table.Cell>Gross Income Per Month</Table.Cell>
             <Table.Cell textAlign="end">
-              {house.tex_amount ? numberWithCommas(house.tex_amount) : "null"}
+              {numberWithCommas(house.gross_income_per_month)}
             </Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Credit Score</Table.Cell>
+            <Table.Cell textAlign="end">{house.credit_score}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Appliances</Table.Cell>
+            <Table.Cell textAlign="end">{house.appliances}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Management</Table.Cell>
+            <Table.Cell textAlign="end">{house.management}</Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table.Root>

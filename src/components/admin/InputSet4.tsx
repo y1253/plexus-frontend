@@ -17,6 +17,7 @@ export const InputSet4 = ({ onChange, onChange2, submit, per }: Props) => {
     <>
       <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
         <FileUploadRoot
+          accept={["image/png", "image/jpeg"]}
           marginBottom={20}
           maxW="xl"
           alignItems="stretch"
@@ -30,6 +31,7 @@ export const InputSet4 = ({ onChange, onChange2, submit, per }: Props) => {
           <FileUploadList showSize clearable />
         </FileUploadRoot>
         <FileUploadRoot
+          accept={["image/png", "image/jpeg"]}
           maxW="xl"
           alignItems="stretch"
           maxFiles={40}

@@ -24,7 +24,9 @@ const InputSet1 = ({ next }: Props) => {
       options: createListCollection({
         items: [
           { label: "Condo", value: "Condo" },
-          { label: "Private", value: "Private" },
+          { label: "House", value: "House" },
+          { label: "Apartment", value: "Apartment" },
+          { label: "Townhome", value: "Townhome" },
         ],
       }),
     },

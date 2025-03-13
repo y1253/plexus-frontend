@@ -8,8 +8,10 @@ interface Props {
 }
 
 const InputSet2 = ({ next, per }: Props) => {
-  const { register, handleSubmit, setValue } = useForm();
-  const dataList = [
+  const { register, handleSubmit, setValue, watch } = useForm();
+  const purchase_type = watch("purchase_type");
+
+  let dataList = [
     { id: "tag", name: "Tag", type: "text" },
     { id: "description", name: "Description", type: "text" },
     { id: "year_build", name: "Year Build", type: "date" },
@@ -27,7 +29,32 @@ const InputSet2 = ({ next, per }: Props) => {
     { id: "price_per_sqft", name: "Price Per Sqft", type: "currency" },
     { id: "tex_amount", name: "Tex Amount", type: "currency" },
   ];
+
+  const dataListRent = [
+    {
+      id: "gross_income_per_month",
+      name: "gross income per month",
+      type: "currency",
+    },
+    { id: "credit_score", name: "credit score", type: "number" },
+    { id: "appliances", name: "appliances", type: "text" },
+    { id: "management", name: "Management", type: "text" },
+    { id: "lease_term", name: "Lease Term", type: "text" },
+  ];
+
+  if (purchase_type === "Rent") {
+    dataList = [
+      ...dataList.filter(
+        (f) =>
+          f.id !== "price_per_sqft" &&
+          f.id !== "tex_amount" &&
+          f.id !== "year_build"
+      ),
+      ...dataListRent,
+    ];
+  }
   const submit = handleSubmit((e) => next(e));
+
   return (
     <form onSubmit={submit}>
       <InputFieldStructer

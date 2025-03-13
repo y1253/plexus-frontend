@@ -7,9 +7,9 @@ form{
 :Link{
     text-decoration: none;
 }
-.image-gallery {
+/* .image-gallery {
     width: 40%;
-    height: 60px;
+    
 }
 .image-gallery-slide img {
     width: 100%;
@@ -21,4 +21,23 @@ form{
 }
 .fullscreen .image-gallery-slide img {
     max-height: 100vh;
-}
+} */
+
+/* .slider-container {
+    width: 40%;
+    height: 100;
+    
+    
+    position:fixed;
+    top:0;
+    left:0;
+    
+    } */
+
+    /* .fit{
+        object-fit:cover;
+   } */
+
+   html {
+    scroll-behavior: smooth;
+  }

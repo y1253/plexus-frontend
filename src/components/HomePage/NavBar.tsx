@@ -6,26 +6,34 @@ export const NavBar = () => {
   return (
     <>
       <HStack
+        paddingRight={"5%"}
+        paddingLeft={"5%"}
         justifyContent={"space-between"}
-        padding={"10px"}
+        //padding={"10px"}
         bgColor={"black"}
-        height={"60px"}
+        height={"80px"}
         position={"fixed"}
         width={"100%"}
-        zIndex={1}
+        zIndex={5}
       >
-        <HStack>
+        <HStack width={"20%"} justifyContent={"space-between"}>
           {/* <Image src={logo2} boxSize="60px" /> */}
-          <Text color={"white"}>Plexus Brokerage</Text>
+
           <Link to="/">
-            <Text color={"white"}>Home</Text>
+            <Text color={"white"}>Plexus Brokerage</Text>
+          </Link>
+          <Link to="/forSale">
+            <Text color={"white"}>Buy</Text>
+          </Link>
+          <Link to="/forRent">
+            <Text color={"white"}>Rent</Text>
           </Link>
         </HStack>
         <Link to="/contact">
           <Text color={"white"}>Contact</Text>
         </Link>
       </HStack>
-      <HStack height={"60px"} />
+      <HStack height={"80px"} />
     </>
   );
 };

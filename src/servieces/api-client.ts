@@ -2,10 +2,10 @@ import axios from "axios";
 
 
 const apiClientUrl= axios.create({
-    // baseURL:"http://plexus.eastus.cloudapp.azure.com"
-    //baseURL:"http://localhost:5000"
+     //baseURL:"http://plexus.eastus.cloudapp.azure.com"
+    baseURL:"http://localhost:5000"
 
-    baseURL:"https://ygbackend.com"
+    //baseURL:"https://ygbackend.com"
 })
 
 
@@ -20,6 +20,7 @@ class apiClient<T>{
     getAll=(selectedHouse:number|null |string|undefined)=>{
         return apiClientUrl.get<T>(this.endpoint,{params:{id:selectedHouse}}).then((res)=>res.data)
     }
+    
     
 
     adminGetAll=()=>{

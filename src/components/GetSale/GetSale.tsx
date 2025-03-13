@@ -1,15 +1,11 @@
 import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
-import { HouseCard } from "./HouseCard";
-import useHouse from "../../hooks/useHouse";
+import { HouseCard } from "../HomePage/HouseCard";
+
 import { useNavigate } from "react-router-dom";
-
-interface Props {
-  selectedHouse: number | null;
-}
-export const CardGrid = ({ selectedHouse }: Props) => {
+import useHouseForSale from "../../hooks/useHouseForSale";
+const GetSale = () => {
   const navigateRoute = useNavigate();
-  const { data: house, error, isLoading } = useHouse(selectedHouse);
-
+  const { data: house, error, isLoading } = useHouseForSale();
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       {isLoading && (
@@ -18,7 +14,7 @@ export const CardGrid = ({ selectedHouse }: Props) => {
       {error && <Text>{error.message}</Text>}
       <SimpleGrid
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-        marginTop={"40px"}
+        marginTop={"80px"}
         columnGap="20px"
         rowGap={"20px"}
         overflow={"hidden"}
@@ -37,3 +33,5 @@ export const CardGrid = ({ selectedHouse }: Props) => {
     </div>
   );
 };
+
+export default GetSale;

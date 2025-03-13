@@ -6,7 +6,7 @@ import DetailPicturs from "./HomeDetails/DetailPicturs";
 import Footer from "./HomeDetails/Footer";
 import useHouse from "../hooks/useHouse";
 import { useState } from "react";
-import GallerySelector from "./HomeDetails/GallerySelector";
+import FooterRental from "./HomeDetails/FooterRental";
 
 export const HomeDetailPage = () => {
   const params = useParams();
@@ -26,13 +26,12 @@ export const HomeDetailPage = () => {
               width={"100%"}
               margin={1}
               display={"flex"}
-              flexDir={"column"}
               alignItems={"center"}
             >
               <HStack
                 justifyContent={"center"}
                 shadow={"lg"}
-                width={700}
+                width={"80%"}
                 padding={2}
                 borderRadius={8}
               >
@@ -42,14 +41,18 @@ export const HomeDetailPage = () => {
                 />
               </HStack>
               <DetailPicturs
+                currentMainPic={mainPicture || house[0].main_picture}
                 picture={house[0].pictures}
                 changePicture={(p) => setMainPicture(p)}
               />
-              <GallerySelector picture={house[0].pictures}></GallerySelector>
             </Box>
           </GridItem>
           <GridItem width={"100%"} area={"footer"}>
-            <Footer house={house[0]} />
+            {house[0].purchase_type === "Rent" ? (
+              <FooterRental house={house[0]} />
+            ) : (
+              <Footer house={house[0]} />
+            )}
           </GridItem>
         </Grid>
       </>
